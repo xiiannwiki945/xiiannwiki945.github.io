@@ -25,16 +25,39 @@
 └── assets/
     ├── style.css               # 全部样式（亮/暗两套变量）
     ├── app.js                  # 主题切换 / 目录高亮 / 搜索
-    └── search-index.js         # 搜索索引（发新文章要更新）
+    │   └── search-index.js         # 搜索索引（脚本会自动加条目）
+    └── scripts/
+        └── new_post.py            # 发文助手：一条命令生成文章并同步全站
 ```
 
 ## 发一篇新文章
 
-1. 复制任意一个文章 html，改标题、日期、标签和正文
-2. `index.html` 列表和 `archive.html` 里各加一条
-3. `assets/search-index.js` 里加一条索引（title / url / date / tags / body）
-4. `feed.xml` 里加一个 `<item>`
-5. `git add -A && git commit -m "post: 标题" && git push`，Actions 构建约 1 分钟自动上线
+用仓库自带的发文助手，一条命令生成文章并同步首页、归档、搜索索引和 RSS：
+
+```bash
+python3 scripts/new_post.py \
+    --title "文章标题" \
+    --slug my-post \
+    --tags Hugo,随笔 \
+    --excerpt "一句话摘要"
+```
+
+它会做四件事：生成 `my-post.html`（正文留了 TODO 占位）、在 `index.html` 和 `archive.html` 插入条目、
+在 `assets/search-index.js` 加索引、在 `feed.xml` 加 RSS 项并更新发布时间。
+
+剩下手动做的只有两步：
+
+1. 打开 `my-post.html`，在 `prose` 区块里写正文；有小节就把 `<h2 id="sec-1">` 和右侧目录的
+   `<a href="#sec-1">` 补上
+2. 把 `assets/search-index.js` 里这条的 `body` 换成正文纯文本（搜索摘要取自这里）
+
+然后：
+
+```bash
+git add -A && git commit -m "post: 文章标题" && git push
+```
+
+Actions 构建约 1 分钟自动上线。
 
 ## 部署
 
