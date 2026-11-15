@@ -1,0 +1,72 @@
+name: New post
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: "文章标题"
+        required: true
+        type: string
+      slug:
+        description: "文件名（小写字母数字短横线，如 my-post）"
+        required: true
+        type: string
+      tags:
+        description: "标签（逗号分隔，如 随笔,写作）"
+        required: true
+        type: string
+      excerpt:
+        description: "一句话摘要（显示在首页列表）"
+        required: true
+        type: string
+      date:
+        description: "日期 YYYY-MM-DD（留空 = 今天）"
+        required: false
+        type: string
+      minutes:
+        description: "预计阅读分钟数（默认 3）"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: new-post
+  cancel-in-progress: false
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 生成文章并同步全站
+        env:
+          POST_TITLE: ${{ inputs.title }}
+          POST_SLUG: ${{ inputs.slug }}
+          POST_TAGS: ${{ inputs.tags }}
+          POST_EXCERPT: ${{ inputs.excerpt }}
+          POST_DATE: ${{ inputs.date }}
+          POST_MINUTES: ${{ inputs.minutes }}
+        run: |
+          ARGS=(--title "$POST_TITLE" --slug "$POST_SLUG" --tags "$POST_TAGS" --excerpt "$POST_EXCERPT")
+          [ -n "$POST_DATE" ] && ARGS+=(--date "$POST_DATE")
+          ARGS+=(--minutes "${POST_MINUTES:-3}")
+          python3 scripts/new_post.py "${ARGS[@]}"
+
+      - name: 提交并推送
+        env:
+          POST_TITLE: ${{ inputs.title }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "post: $POST_TITLE"
+          git push
