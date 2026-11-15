@@ -71,7 +71,37 @@ git add -A && git commit -m "post: 文章标题" && git push
 
 Actions 构建约 1 分钟自动上线。
 
+## 图片和视频
+
+统一放在 `media/日期-用途/` 文件夹里，例如 `media/20261115-screenshot/`。
+
+上传（网页即可）：仓库页面 → **Add file → Upload files**，把文件拖进去 → Commit changes。
+
+在文章 `prose` 区块里引用：
+
+```html
+<figure>
+  <img src="media/20261115-screenshot/demo.png" alt="截图说明" loading="lazy">
+  <figcaption>图注：这张图说明什么</figcaption>
+</figure>
+```
+
+视频用 `<video>` 标签（推荐 MP4，单个文件别超过 50MB，仓库总大小建议控制在 1GB 内）：
+
+```html
+<video controls preload="metadata" src="media/20261115-demo/clip.mp4" style="width:100%;border-radius:4px;"></video>
+```
+
+更长的视频建议传 B 站后用嵌入代码（占位小、播放流畅）：
+
+```html
+<iframe src="//player.bilibili.com/player.html?bvid=BV号&autoplay=0" scrolling="no" border="0" frameborder="no" style="width:100%;aspect-ratio:16/9;border-radius:4px;" allowfullscreen="true"></iframe>
+```
+
+图片建议先压缩再传（每张 500KB 内），页面加载快很多。
+
 ## 部署
+
 
 push 到 `main` 后由 `.github/workflows/pages.yml` 自动构建发布（GitHub Actions，Source 需设为 GitHub Actions）。
 
