@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>半山笔记</title>
+    <link>https://xiiannwiki945.github.io/</link>
+    <description>记录技术折腾，也记录生活片段。</description>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 14 Nov 2026 22:00:00 +0800</lastBuildDate>
+    <atom:link href="https://xiiannwiki945.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用 Hugo + GitHub Pages 搭一个完全属于自己的博客</title>
+      <link>https://xiiannwiki945.github.io/hugo-github-pages.html</link>
+      <guid>https://xiiannwiki945.github.io/hugo-github-pages.html</guid>
+      <pubDate>Sat, 14 Nov 2026 09:00:00 +0800</pubDate>
+      <description>从 Markdown 到 HTTPS 上线，整条链路都在自己手里：本地写、本地构建、Git 推送，GitHub 只负责托管最终产物。</description>
+    </item>
+    <item>
+      <title>日常写作流程：从 hugo new 到 git push</title>
+      <link>https://xiiannwiki945.github.io/writing-workflow.html</link>
+      <guid>https://xiiannwiki945.github.io/writing-workflow.html</guid>
+      <pubDate>Thu, 12 Nov 2026 09:00:00 +0800</pubDate>
+      <description>把写作拆成四个动作：新建、写、本地预览、推送。熟悉之后，一篇文章从动笔到上线不超过五分钟的操作成本。</description>
+    </item>
+    <item>
+      <title>把内容存成文件：静态博客和自托管监控的同一个思路</title>
+      <link>https://xiiannwiki945.github.io/content-as-files.html</link>
+      <guid>https://xiiannwiki945.github.io/content-as-files.html</guid>
+      <pubDate>Sun, 08 Nov 2026 09:00:00 +0800</pubDate>
+      <description>录像存成本地文件、文章存成 Markdown，本质上都是同一件事：数据的原始形态留在自己手里，上层工具随时可以换。</description>
+    </item>
+  </channel>
+</rss>
