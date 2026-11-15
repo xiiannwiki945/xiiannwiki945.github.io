@@ -92,11 +92,19 @@ Actions 构建约 1 分钟自动上线。
 <video controls preload="metadata" src="media/20261115-demo/clip.mp4" style="width:100%;border-radius:4px;"></video>
 ```
 
-更长的视频建议传 B 站后用嵌入代码（占位小、播放流畅）：
+更长的视频建议传 YouTube 后嵌入（占位小、不占仓库、播放由 YouTube 承担）：
 
 ```html
-<iframe src="//player.bilibili.com/player.html?bvid=BV号&autoplay=0" scrolling="no" border="0" frameborder="no" style="width:100%;aspect-ratio:16/9;border-radius:4px;" allowfullscreen="true"></iframe>
+<iframe src="https://www.youtube.com/embed/视频ID"
+        title="视频标题" loading="lazy"
+        style="width:100%;aspect-ratio:16/9;border:0;border-radius:4px;"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen></iframe>
 ```
+
+视频 ID 就是链接 `youtube.com/watch?v=**dQw4w9WgXcQ**` 里 `v=` 后面那一段（11 位）。
+建议上传时把可见性设为「不公开（Unlisted）」——只有拿到嵌入链接的人能看，不上推荐、不出现在频道页。
 
 图片建议先压缩再传（每张 500KB 内），页面加载快很多。
 
