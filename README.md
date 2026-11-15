@@ -28,7 +28,8 @@
 │   └── search-index.js         # 搜索索引（脚本会自动加条目）
 └── scripts/
     ├── new_post.py             # 发文助手：一条命令生成文章并同步全站
-    ├── open.sh                 # 用 VS Code 打开本仓库
+    ├── start.sh                # 打开仓库开始写作（有 VS Code 则直接打开）
+    ├── open.sh                 # 同上，仅用 VS Code
     └── preview.sh              # 本地起个服务看效果（127.0.0.1:4173）
 ```
 
@@ -93,10 +94,10 @@ sudo snap install code --classic
 然后用编辑器打开仓库：
 
 ```bash
-sh ~/banshan-blog/scripts/open.sh      # 等价于 code ~/banshan-blog
+sh ~/banshan-blog/scripts/start.sh     # 装了 VS Code 就直接打开整个仓库
 ```
 
-桌面上还有一个「半山笔记（写作）」图标，双击同样直接打开仓库。
+不想敲命令的话，直接用文件管理器进 `~/banshan-blog`，右键任意 `.html` → 「用其他程序打开」→ 选编辑器即可。
 
 **写作流程**：
 
