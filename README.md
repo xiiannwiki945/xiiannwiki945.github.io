@@ -22,12 +22,14 @@
 ├── content-as-files.html       # 文章
 ├── tags.html / archive.html / about.html / search.html
 ├── feed.xml                    # RSS
-└── assets/
-    ├── style.css               # 全部样式（亮/暗两套变量）
-    ├── app.js                  # 主题切换 / 目录高亮 / 搜索
-    │   └── search-index.js         # 搜索索引（脚本会自动加条目）
-    └── scripts/
-        └── new_post.py            # 发文助手：一条命令生成文章并同步全站
+├── assets/
+│   ├── style.css               # 全部样式（亮/暗两套变量）
+│   ├── app.js                  # 主题切换 / 目录高亮 / 搜索
+│   └── search-index.js         # 搜索索引（脚本会自动加条目）
+└── scripts/
+    ├── new_post.py             # 发文助手：一条命令生成文章并同步全站
+    ├── open.sh                 # 用 VS Code 打开本仓库
+    └── preview.sh              # 本地起个服务看效果（127.0.0.1:4173）
 ```
 
 ## 发一篇新文章（网页操作，无需本地环境）
@@ -70,6 +72,51 @@ git add -A && git commit -m "post: 文章标题" && git push
 ```
 
 Actions 构建约 1 分钟自动上线。
+
+## 在本地电脑上写（桌面客户端）
+
+先把仓库拉到本地：
+
+```bash
+git clone https://github.com/xiiannwiki945/xiiannwiki945.github.io.git ~/banshan-blog
+```
+
+装一个编辑器。**VS Code** 推荐：
+
+```bash
+sudo snap install code --classic
+```
+
+（或者打开系统「软件中心 / App Center」搜 Visual Studio Code 点安装；也可以直接用系统自带的
+文本编辑器，或者装个 Typora —— 写 HTML 都不挑工具。）
+
+然后用编辑器打开仓库：
+
+```bash
+sh ~/banshan-blog/scripts/open.sh      # 等价于 code ~/banshan-blog
+```
+
+桌面上还有一个「半山笔记（写作）」图标，双击同样直接打开仓库。
+
+**写作流程**：
+
+1. 在 VS Code 里复制一份 `content-as-files.html` 当模板，改名成新文章
+2. 改标题、正文，顺手把 `index.html` / `archive.html` / `assets/search-index.js` / `feed.xml` 里加上这条
+   （不想手动同步就跑 `python3 scripts/new_post.py --title "标题" --slug my-post --tags 随笔 --excerpt "摘要"`，
+   它会自动把这四处都补好）
+3. 想看效果：`sh scripts/preview.sh`，浏览器开 http://127.0.0.1:4173
+4. 推上去：
+
+```bash
+cd ~/banshan-blog
+git add -A
+git commit -m "post: 文章标题"
+git push
+```
+
+第一次 push 会问账号密码：账号填 `xiiannwiki945`，密码填一个 **Personal Access Token**
+（GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens，勾 `Contents: Read and write`
+和 `Metadata: Read`），勾上「记住」以后就不用再输了。
 
 ## 图片和视频
 
