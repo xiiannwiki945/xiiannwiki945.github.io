@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用 Hugo + GitHub Pages 搭一个完全属于自己的博客 — 半山笔记</title>
+<meta name="description" content="从 Markdown 到 HTTPS 上线，整条链路都在自己手里：本地写、本地构建、Git 推送，GitHub 只负责托管最终产物。">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="canonical" href="https://xiiannwiki945.github.io/hugo-github-pages.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="半山笔记">
+<meta property="og:title" content="用 Hugo + GitHub Pages 搭一个完全属于自己的博客 — 半山笔记">
+<meta property="og:description" content="从 Markdown 到 HTTPS 上线，整条链路都在自己手里：本地写、本地构建、Git 推送，GitHub 只负责托管最终产物。">
+<meta property="og:url" content="https://xiiannwiki945.github.io/hugo-github-pages.html">
+<meta name="twitter:card" content="summary">
+
+<script>(function(){try{var t=localStorage.getItem("banshan-theme");if(t!=="dark"&&t!=="light"){t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";}document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand serif" href="index.html"><span class="brand-mark" aria-hidden="true"></span>半山笔记</a>
+    <nav class="nav" aria-label="主导航">
+      <a href="index.html" class="is-accent">文章</a>
+      <a href="tags.html">标签</a>
+      <a href="archive.html">归档</a>
+      <a href="about.html">关于</a>
+    </nav>
+    <div class="nav-tools">
+      <a class="icon-btn" href="search.html" aria-label="搜索">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 4 4"></path></svg>
+      </a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="切换主题">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"></path></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"></path></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="post-layout">
+    <article class="post">
+      <header class="post-header">
+        <h1 class="serif">用 Hugo + GitHub Pages 搭一个完全属于自己的博客</h1>
+        <div class="meta-line">
+          <time datetime="2026-11-14">2026-11-14</time>
+          <span class="meta-sep">·</span>
+          <span>3 分钟</span>
+          <span class="meta-sep">·</span>
+          <a href="tags.html">#Hugo</a>
+          <a href="tags.html">#GitHub Pages</a>
+          <a href="tags.html">#静态博客</a>
+        </div>
+      </header>
+
+      <div class="prose">
+        <p>这个站点就是按下面的方式搭起来的。整套东西没有数据库，没有后台，没有需要续费的服务，唯一的依赖是 GitHub 的免费静态托管。</p>
+
+        <h2 id="why-static">为什么是静态站</h2>
+        <p>动态博客（WordPress 那类）的每一页都是临时拼出来的：请求进来，PHP/Node 查数据库，渲染模板，返回 HTML。静态站把这步提前到推送的时候——写作时是一次编译，之后每个访客拿到的都是同一个 HTML 文件。</p>
+        <p>区别不只是"快"：</p>
+        <ul>
+          <li>访客碰不到你的代码执行环境，也就没有注入、爆破后台这类问题</li>
+          <li>页面可以直接丢给任何 CDN，缓存命中率接近 100%</li>
+          <li>文章的源文件是 <code>.md</code>，不是数据库里的一行记录，随时可以打包带走</li>
+        </ul>
+        <p>代价是：没有原生评论、没有登录、没有站内搜索后端。这些都能用第三方或纯前端方案补上，后面会说。</p>
+
+        <h2 id="frameworks">三个框架怎么选</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>框架</th><th>运行时</th><th>构建速度</th><th>部署到 Pages</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Jekyll</td><td>Ruby</td><td>中</td><td>原生支持，push 即构建</td></tr>
+              <tr><td>Hexo</td><td>Node.js</td><td>中</td><td>需要 Action 或 deploy 脚本</td></tr>
+              <tr><td>Hugo</td><td>Go（单二进制）</td><td>极快</td><td>需要 Action，配置简单</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>几百篇文章在 Hugo 这里是"秒级"的量级，而且它只有一个可执行文件，不依赖 Ruby/Node 环境，在 ARM 小主机上装完就能用。对长期写作的人来说，构建时间和环境依赖是最容易被低估的成本。</p>
+        <div class="callout">
+          <p><strong>选型建议</strong><br>如果你已经有 Node 环境、喜欢折腾主题，Hexo 的生态更热闹；如果你只想写东西、不想维护环境，Hugo 更省心。Jekyll 的优势只剩 GitHub 原生构建，但它的插件白名单会限制你，实际用起来反而别扭。</p>
+        </div>
+
+        <h2 id="deploy">部署链路</h2>
+        <figure class="code-block">
+          <figcaption class="code-block__head"><span>终端 · Markdown</span><span>shell</span></figcaption>
+          <pre><code><span class="code-prompt">#</span> 本地 Markdown
+<span class="code-prompt">$</span> hugo            <span class="code-prompt">#</span> 编译
+public/           <span class="code-prompt">#</span> 静态文件
+<span class="code-prompt">$</span> git push        <span class="code-prompt">#</span> 触发构建
+GitHub Actions 重新构建
+https://&lt;用户名&gt;.github.io</code></pre>
+        </figure>
+        <p>关键在于 Actions 里重新构建，而不是把 <code>public/</code> 一起提交上去。这样仓库里只有源文件，历史干净，换主题、改配置都不需要额外清理产物。</p>
+        <p>工作流的核心就三步：</p>
+        <figure class="code-block">
+          <figcaption class="code-block__head"><span>workflow.yml</span><span>yaml</span></figcaption>
+          <pre><code>- run: hugo --minify --gc
+- uses: actions/upload-pages-artifact@v3
+  with:
+    path: ./public
+- uses: actions/deploy-pages@v4</code></pre>
+        </figure>
+
+        <h2 id="pitfalls">几个容易踩的坑</h2>
+        <p><strong>baseURL 写错</strong>：这是 404 和样式丢失的头号原因。仓库名必须是 <code>&lt;用户名&gt;.github.io</code> 才能用根路径；如果叫 blog，地址就是 <code>https://&lt;用户名&gt;.github.io/blog/</code>，baseURL 也必须带上这个子路径。</p>
+        <p><strong>大小写</strong>：主题里的大小写不敏感路径在某些系统上能跑，推上去就 404。文件名一律小写最省事。</p>
+        <p><strong>直接拷主题的 exampleSite 配置</strong>：里面的语言、菜单、示例内容会一起带进来，构建出来的首页常常不是你想要的。</p>
+        <p><strong>submodule 引主题</strong>：Actions 里必须加 <code>submodules: true</code>，否则构建出来的页面没有样式。</p>
+      </div>
+
+      <div class="post-foot">
+        <a href="index.html">← 返回文章列表</a>
+        <span aria-hidden="true">·</span>
+        <a href="writing-workflow.html">下一篇：日常写作流程</a>
+      </div>
+    </article>
+
+    <aside class="toc" aria-label="目录">
+      <h2 class="toc__title">目录</h2>
+      <a href="#why-static">为什么是静态站</a>
+      <a href="#frameworks">三个框架怎么选</a>
+      <a href="#deploy">部署链路</a>
+      <a href="#pitfalls">几个容易踩的坑</a>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap site-footer__inner">
+    <p>© 2026 半山笔记 · xiiannwiki945.github.io</p>
+    <div class="footer-links">
+      <a href="feed.xml">RSS</a>
+      <a href="https://github.com/xiiannwiki945" rel="noopener">GitHub</a>
+      <a href="search.html">搜索</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js" defer></script>
+</body>
+</html>
