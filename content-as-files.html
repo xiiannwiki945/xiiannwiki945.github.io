@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>把内容存成文件：静态博客和自托管监控的同一个思路 — 半山笔记</title>
+<meta name="description" content="录像存成本地文件、文章存成 Markdown，本质上都是同一件事：数据的原始形态留在自己手里，上层工具随时可以换。">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="canonical" href="https://xiiannwiki945.github.io/content-as-files.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="半山笔记">
+<meta property="og:title" content="把内容存成文件：静态博客和自托管监控的同一个思路 — 半山笔记">
+<meta property="og:description" content="录像存成本地文件、文章存成 Markdown，本质上都是同一件事：数据的原始形态留在自己手里，上层工具随时可以换。">
+<meta property="og:url" content="https://xiiannwiki945.github.io/content-as-files.html">
+<meta name="twitter:card" content="summary">
+
+<script>(function(){try{var t=localStorage.getItem("banshan-theme");if(t!=="dark"&&t!=="light"){t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";}document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand serif" href="index.html"><span class="brand-mark" aria-hidden="true"></span>半山笔记</a>
+    <nav class="nav" aria-label="主导航">
+      <a href="index.html" class="is-accent">文章</a>
+      <a href="tags.html">标签</a>
+      <a href="archive.html">归档</a>
+      <a href="about.html">关于</a>
+    </nav>
+    <div class="nav-tools">
+      <a class="icon-btn" href="search.html" aria-label="搜索">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 4 4"></path></svg>
+      </a>
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="切换主题">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"></path></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"></path></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="post-layout">
+    <article class="post">
+      <header class="post-header">
+        <h1 class="serif">把内容存成文件：静态博客和自托管监控的同一个思路</h1>
+        <div class="meta-line">
+          <time datetime="2026-11-08">2026-11-08</time>
+          <span class="meta-sep">·</span>
+          <span>3 分钟</span>
+          <span class="meta-sep">·</span>
+          <a href="tags.html">#随笔</a>
+          <a href="tags.html">#自托管</a>
+        </div>
+      </header>
+
+      <div class="prose">
+        <p>前面写过家里那套监控：摄像头把录像写到本地硬盘，不做云存储，需要的时候再调出来看。搭这个博客的时候我发现，两者是同一种思路的两种表现。</p>
+
+        <h2 id="point-1">共同点一：原始数据是文件</h2>
+        <p>监控系统的核心不是那个查看界面，而是硬盘上的 <code>.mp4</code>。界面坏了、软件停更了，录像还在，换个播放器照样能看。</p>
+        <p>博客的核心也不是主题和框架，而是 <code>content/</code> 里那些 <code>.md</code>。Hugo 哪天不维护了，换成 Hexo、Eleventy 甚至自己写个脚本，正文一个字都不会丢。</p>
+        <p>反过来说，如果文章只存在于某个平台的编辑器里，你拥有的其实是"访问权"，不是"所有权"。平台改规则、加广告、限制导出、甚至关停，你只能接受。</p>
+
+        <h2 id="point-2">共同点二：构建和运行分离</h2>
+        <p>监控是"采集 → 落盘 → 回放"三段，博客是"写作 → 编译 → 托管"三段。中间那步都是把原始数据变成可直接消费的成品：</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th></th><th>监控</th><th>博客</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>原始数据</td><td>摄像头视频流</td><td>Markdown 源文件</td></tr>
+              <tr><td>加工</td><td>编码、切片、索引</td><td>Hugo 编译成 HTML</td></tr>
+              <tr><td>成品</td><td>硬盘上的录像文件</td><td><code>public/</code> 静态目录</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>这种结构的好处是：原始数据永远比工具活得久。换掉回放器不影响录像，换掉主题和生成器也不影响正文。</p>
+        <p>反过来，如果把两步合成一步——边录边编码成私有格式、边写边存进数据库——那个中间产物就变成了新的依赖。工具一换，数据就跟着废掉一半。</p>
+
+        <h2 id="point-3">共同点三：不依赖单一厂商</h2>
+        <p>录像换个播放器还能看，博客换托管也一样：GitHub Pages → Cloudflare Pages / Netlify / 一台 VPS 上的 nginx，改一下 DNS 就行。域名在自己手里，就还有退路。</p>
+        <p>这一点的价值不在"搬家"本身，而在于你知道自己能搬。有退路的时候，选择反而是轻松的——不用因为"搬不动"而忍下一个越来越难用的平台。</p>
+
+        <h2 id="cost">代价也要说清楚</h2>
+        <p>没有后台、没有原生评论、没有统计面板，这些都得自己补。硬盘会坏，所以要有备份，而且得定期确认备份是能恢复的，不是只存在过。博客的搜索只能在前端做一份索引，文章多了索引文件也会变大。</p>
+        <p>说白了，成本从"每月订阅费加平台规则"换成了"一次性搭建加偶尔维护"。前者是持续的、被动的；后者是集中的、自己可控的。哪种更划算，取决于你打算写多久。</p>
+
+        <h2 id="end">最后</h2>
+        <p>把内容存成文件，不是为了复古。它换来的是一条确定的边界：这部分东西永远是我的，工具只是工具。</p>
+      </div>
+
+      <div class="post-foot">
+        <a href="writing-workflow.html">← 上一篇：日常写作流程</a>
+        <span aria-hidden="true">·</span>
+        <a href="index.html">返回文章列表 →</a>
+      </div>
+    </article>
+
+    <aside class="toc" aria-label="目录">
+      <h2 class="toc__title">目录</h2>
+      <a href="#point-1">共同点一：原始数据是文件</a>
+      <a href="#point-2">共同点二：构建和运行分离</a>
+      <a href="#point-3">共同点三：不依赖单一厂商</a>
+      <a href="#cost">代价也要说清楚</a>
+      <a href="#end">最后</a>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap site-footer__inner">
+    <p>© 2026 半山笔记 · xiiannwiki945.github.io</p>
+    <div class="footer-links">
+      <a href="feed.xml">RSS</a>
+      <a href="https://github.com/xiiannwiki945" rel="noopener">GitHub</a>
+      <a href="search.html">搜索</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js" defer></script>
+</body>
+</html>
