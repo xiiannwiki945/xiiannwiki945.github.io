@@ -5,8 +5,50 @@
     <link>https://xiiannwiki945.github.io/</link>
     <description>记录技术折腾，也记录生活片段。</description>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 14 Nov 2026 22:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 16 Nov 2026 18:34:46 +08:00</lastBuildDate>
     <atom:link href="https://xiiannwiki945.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>西安一日速通：四条线，一天只走一条</title>
+      <link>https://xiiannwiki945.github.io/xian-one-day.html</link>
+      <guid>https://xiiannwiki945.github.io/xian-one-day.html</guid>
+      <pubDate>Mon, 16 Nov 2026 09:00:00 +08:00</pubDate>
+      <description>西安一天不可能玩遍。这份手册的做法相反：一天只走一条线，走透。四条线按落地方式选，人均 50 到 240。</description>
+    </item>
+    <item>
+      <title>西安两日经典：48 小时怎么排，怎么砍</title>
+      <link>https://xiiannwiki945.github.io/xian-two-days.html</link>
+      <guid>https://xiiannwiki945.github.io/xian-two-days.html</guid>
+      <pubDate>Mon, 16 Nov 2026 09:00:00 +08:00</pubDate>
+      <description>两日游只有 48 小时，兵马俑、陕历博、城墙回坊、不夜城分在三个方向。这份手册给的是一种排法加一张取舍表。</description>
+    </item>
+    <item>
+      <title>西安三日深度：一天只干一件事</title>
+      <link>https://xiiannwiki945.github.io/xian-three-days.html</link>
+      <guid>https://xiiannwiki945.github.io/xian-three-days.html</guid>
+      <pubDate>Mon, 16 Nov 2026 09:00:00 +08:00</pubDate>
+      <description>三天不是把两天的行程拉长，而是每天只放一个重点。含三档预算表和三日总账，人均 1000 元出头的真实口径。</description>
+    </item>
+    <item>
+      <title>西安带娃四日：按体力上限排，不按景点数量</title>
+      <link>https://xiiannwiki945.github.io/xian-with-kids.html</link>
+      <guid>https://xiiannwiki945.github.io/xian-with-kids.html</guid>
+      <pubDate>Mon, 16 Nov 2026 09:00:00 +08:00</pubDate>
+      <description>大人行程的问题是看不完，带娃行程的问题是扛不住。四天里只有两天进重景点，其余时间让孩子放电。</description>
+    </item>
+    <item>
+      <title>西安周边冷门两日：避开人潮的四条线</title>
+      <link>https://xiiannwiki945.github.io/xian-around.html</link>
+      <guid>https://xiiannwiki945.github.io/xian-around.html</guid>
+      <pubDate>Mon, 16 Nov 2026 09:00:00 +08:00</pubDate>
+      <description>兵马俑和回民街在节假日是排队地狱，但西安真正的底子在周边县城。四条线，两天一夜，人均 260 到 520。</description>
+    </item>
+    <item>
+      <title>西安早餐地图：50 家带价格和收摊时间</title>
+      <link>https://xiiannwiki945.github.io/xian-breakfast.html</link>
+      <guid>https://xiiannwiki945.github.io/xian-breakfast.html</guid>
+      <pubDate>Mon, 16 Nov 2026 09:00:00 +08:00</pubDate>
+      <description>专门解决早上吃什么、几点去。三条早市线、按顺序吃的清单、一碗的价，还有三个让你算懂行的知识点。</description>
+    </item>
     <item>
       <title>用 Hugo + GitHub Pages 搭一个完全属于自己的博客</title>
       <link>https://xiiannwiki945.github.io/hugo-github-pages.html</link>

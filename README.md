@@ -20,6 +20,7 @@
 ├── hugo-github-pages.html      # 文章
 ├── writing-workflow.html       # 文章
 ├── content-as-files.html       # 文章
+├── xian-*.html                 # 西安手册系列（一日／两日／三日／带娃／周边／早餐）
 ├── tags.html / archive.html / about.html / search.html
 ├── feed.xml                    # RSS
 ├── assets/
